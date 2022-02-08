@@ -1,3 +1,4 @@
 stb
 dkm
 image_segmentation
+*.segmented.*
