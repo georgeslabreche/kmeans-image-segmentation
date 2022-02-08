@@ -36,9 +36,8 @@
 // parse the program options
 
 int parse_options(int argc, char **argv,
-    int *argv_index_input, int *argv_index_metadata,
-    int *argv_index_write_mode, int *argv_index_k,
-    int *argv_index_palette)
+    int *argv_index_input, int *argv_index_write_mode, 
+    int *argv_index_k, int *argv_index_palette)
 {
     int argn;
     for (argn = 1; argn < argc; argn++)
@@ -48,7 +47,6 @@ int parse_options(int argc, char **argv,
         {
             printf("%s [options] ...", PROGRAM_NAME);
             printf("\n  --input    / -i       the file path of the input image");
-            printf("\n  --metadata / -m       the file path of the metadata csv file (optional)");
             printf("\n  --write    / -w       the write mode of the output image (optional)"
                    "\n\t0 - do not write a new image (equivalent to not specifying --write)"
                    "\n\t1 - write a new image as a new file"
@@ -67,10 +65,6 @@ int parse_options(int argc, char **argv,
         if (streq (argv [argn], "--input")
         ||  streq (argv [argn], "-i"))
             *argv_index_input = ++argn;
-        else
-        if (streq (argv [argn], "--metadata")
-        ||  streq (argv [argn], "-m"))
-            *argv_index_metadata = ++argn;
         else
         if (streq (argv [argn], "--write")
         ||  streq (argv [argn], "-w"))
@@ -108,22 +102,6 @@ int parse_options(int argc, char **argv,
         return EINVAL;
     }
 
-
-#if 0
-    // --------------------------------------------------------------------------
-    // check that metadata was given (even though we don't use it for v1... for now)
-
-    if(*argv_index_metadata == -1)
-    {
-        /* print error message */
-        printf("No metadata file path specified. Get help: ./%s -?\n", PROGRAM_NAME);
-
-        /* program error exit code */
-        /* 22 	EINVAL 	Invalid argument */
-        return EINVAL;
-    }
-#endif
-
     // --------------------------------------------------------------------------
     // check that the k-means k value was given
 
@@ -136,7 +114,6 @@ int parse_options(int argc, char **argv,
         /* 22 	EINVAL 	Invalid argument */
         return EINVAL;
     }
-
 
     /* success */
     return 0;
@@ -196,16 +173,13 @@ int main(int argc, char **argv)
 
     /* get provider host and port from command arguments */
     int argv_index_input = -1;
-    int argv_index_metadata = -1;
     int argv_index_write_mode = -1;
     int argv_index_k = -1;
     int argv_index_palette = -1;
 
     /* parse the program options */
     rc = parse_options(argc, argv,
-        &argv_index_input, &argv_index_metadata,
-        &argv_index_write_mode, &argv_index_k,
-        &argv_index_palette);
+        &argv_index_input, &argv_index_write_mode, &argv_index_k, &argv_index_palette);
 
     /* error check */
     if(rc != 0)
