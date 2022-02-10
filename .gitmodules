@@ -4,3 +4,4 @@
 [submodule "dkm"]
 	path = dkm
 	url = https://github.com/georgeslabreche/dkm.git
+        branch = opssat
