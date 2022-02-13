@@ -40,7 +40,7 @@ Palette options (case sensitive):
 - Set3
 - BW
 
-Supported range for k values are 2 to 11 for palettes except BW (k=2) and Random (k >= 2 with no ceiling).
+Refer to [colorbrewer2.org](https://colorbrewer2.org/) for palette colors. Supported range for k values are 2 to 11 for palettes except BW (k=2) and Random (k >= 2 with no ceiling).
 
 ### Example
 `$./image_segmentation -i samples/img_msec_1607377664281_2_thumbnail.jpeg -w 1 -k 7 -p Set3`
